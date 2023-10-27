@@ -46,6 +46,7 @@ jobs:
         with:
           repository: im-sandbox-mikaelt/hello-pro-composite-action
           path: ./.github/actions/hello-pro-composite-action
+          token: ${{ secrets.PROD_SECRET }}
       
       - name: Run a private composite action
         id: foo
