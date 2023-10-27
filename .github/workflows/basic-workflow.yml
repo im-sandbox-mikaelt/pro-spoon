@@ -37,9 +37,22 @@ jobs:
 
   deployment:
     runs-on: ubuntu-latest
-    environment: DEV
     steps:
       - name: Run only if a PR is opened
         if: ${{ github.event_name == 'pull_request' }} 
         run: echo Hello, from the PR!!!
+
+      - uses: actions/checkout@v3
+        with:
+          repository: im-sandbox-mikaelt/hello-pro-composite-action
+          path: ./.github/actions/hello-pro-composite-action
+      
+      - name: Run a private composite action
+        id: foo
+        uses: ./.github/actions/hello-pro-composite-action
+        with:
+          who-to-greet: 'Mona the Octocat with Progressive!!'
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
+      
           
